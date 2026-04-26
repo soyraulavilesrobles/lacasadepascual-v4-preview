@@ -1288,6 +1288,264 @@
     .footer__dev a { color: var(--sky-dark); }
 
     /* ══════════════════════════════
+       CART DRAWER
+    ══════════════════════════════ */
+    .cart-overlay {
+      position: fixed; inset: 0;
+      z-index: 300;
+      background: rgba(26,26,46,0);
+      pointer-events: none;
+      transition: background 0.35s;
+    }
+    .cart-overlay.open {
+      background: rgba(26,26,46,0.45);
+      pointer-events: all;
+    }
+
+    .cart-drawer {
+      position: fixed;
+      top: 0; right: 0; bottom: 0;
+      z-index: 301;
+      width: min(28rem, 100vw);
+      background: var(--white);
+      display: flex;
+      flex-direction: column;
+      transform: translateX(100%);
+      transition: transform 0.4s var(--ease-out);
+      box-shadow: -8px 0 40px rgba(26,26,46,0.12);
+    }
+    .cart-drawer.open { transform: translateX(0); }
+
+    .cart-drawer__head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1.4rem 1.6rem;
+      border-bottom: 1px solid var(--border);
+      flex-shrink: 0;
+    }
+    .cart-drawer__title {
+      font-family: var(--font-display);
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: var(--navy);
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+    }
+    .cart-drawer__count {
+      background: var(--pink);
+      color: white;
+      font-size: 0.68rem;
+      font-weight: 700;
+      width: 1.4rem; height: 1.4rem;
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-family: var(--font-body);
+    }
+    .cart-drawer__close {
+      width: 2.2rem; height: 2.2rem;
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      color: var(--navy);
+      opacity: 0.4;
+      transition: opacity 0.2s, background 0.2s;
+    }
+    .cart-drawer__close:hover { opacity: 1; background: var(--pink-pale); }
+
+    .cart-drawer__items {
+      flex: 1;
+      overflow-y: auto;
+      padding: 1.2rem 1.6rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1.1rem;
+      scrollbar-width: thin;
+      scrollbar-color: var(--border) transparent;
+    }
+
+    .cart-item {
+      display: grid;
+      grid-template-columns: 5.5rem 1fr;
+      gap: 1rem;
+      padding-bottom: 1.1rem;
+      border-bottom: 1px solid var(--border);
+    }
+    .cart-item:last-child { border-bottom: none; padding-bottom: 0; }
+
+    .cart-item__img {
+      width: 5.5rem; height: 5.5rem;
+      border-radius: 0.9rem;
+      overflow: hidden;
+      background: var(--off-white);
+      border: 1px solid var(--border);
+      flex-shrink: 0;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .cart-item__img img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+    }
+
+    .cart-item__info { display: flex; flex-direction: column; gap: 0.3rem; }
+    .cart-item__type {
+      font-size: 0.62rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--sky-deep);
+    }
+    .cart-item__name {
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--navy);
+      line-height: 1.3;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+    .cart-item__footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-top: auto;
+      padding-top: 0.4rem;
+    }
+    .cart-item__qty {
+      display: flex;
+      align-items: center;
+      gap: 0;
+      border: 1px solid var(--border);
+      border-radius: 9rem;
+      overflow: hidden;
+    }
+    .cart-item__qty-btn {
+      width: 1.8rem; height: 1.8rem;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1rem;
+      color: var(--navy);
+      opacity: 0.5;
+      transition: background 0.15s, opacity 0.15s;
+    }
+    .cart-item__qty-btn:hover { background: var(--pink-pale); opacity: 1; }
+    .cart-item__qty-num {
+      font-size: 0.83rem;
+      font-weight: 600;
+      color: var(--navy);
+      min-width: 1.4rem;
+      text-align: center;
+    }
+
+    .cart-item__price {
+      font-family: var(--font-display);
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--navy);
+    }
+    .cart-item__price-old {
+      font-size: 0.75rem;
+      color: var(--muted);
+      text-decoration: line-through;
+      font-weight: 300;
+    }
+    .cart-item__remove {
+      font-size: 0.7rem;
+      color: var(--muted);
+      text-decoration: underline;
+      cursor: pointer;
+      margin-top: 0.15rem;
+      transition: color 0.2s;
+    }
+    .cart-item__remove:hover { color: var(--pink); }
+
+    .cart-drawer__foot {
+      flex-shrink: 0;
+      padding: 1.4rem 1.6rem;
+      border-top: 1px solid var(--border);
+      background: var(--off-white);
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    .cart-drawer__free-bar {
+      background: var(--sky-pale);
+      border: 1px solid var(--sky);
+      border-radius: 0.7rem;
+      padding: 0.7rem 1rem;
+      font-size: 0.78rem;
+      color: var(--sky-deep);
+      font-weight: 500;
+    }
+    .cart-drawer__free-bar strong { font-weight: 700; }
+    .cart-drawer__free-progress {
+      margin-top: 0.5rem;
+      height: 4px;
+      background: rgba(62,172,202,0.2);
+      border-radius: 9rem;
+      overflow: hidden;
+    }
+    .cart-drawer__free-fill {
+      height: 100%;
+      background: var(--sky-deep);
+      border-radius: 9rem;
+      width: 68%;
+      transition: width 0.4s var(--ease-out);
+    }
+
+    .cart-drawer__totals {
+      display: flex;
+      flex-direction: column;
+      gap: 0.4rem;
+    }
+    .cart-drawer__row {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.83rem;
+      color: var(--muted);
+    }
+    .cart-drawer__row--total {
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--navy);
+      padding-top: 0.5rem;
+      border-top: 1px solid var(--border);
+      margin-top: 0.2rem;
+    }
+    .cart-drawer__row--total span:last-child {
+      font-family: var(--font-display);
+      font-size: 1.15rem;
+    }
+
+    .cart-drawer__checkout {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      background: var(--pink);
+      color: white;
+      padding: 1rem;
+      border-radius: 9rem;
+      font-size: 0.95rem;
+      font-weight: 700;
+      box-shadow: 0 6px 20px rgba(255,61,139,0.28);
+      transition: transform 0.2s var(--spring), box-shadow 0.2s, background 0.2s;
+    }
+    .cart-drawer__checkout:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 10px 28px rgba(255,61,139,0.38);
+      background: var(--pink-soft);
+    }
+    .cart-drawer__secondary {
+      text-align: center;
+      font-size: 0.78rem;
+      color: var(--muted);
+    }
+    .cart-drawer__secondary a { color: var(--navy); font-weight: 600; text-decoration: underline; }
+    .cart-drawer__secondary a:hover { color: var(--pink); }
+
+    /* ══════════════════════════════
        PREVIEW BADGE
     ══════════════════════════════ */
     .preview-badge {
@@ -1861,6 +2119,126 @@
     </div>
   </footer>
 
+  <!-- ══════ CART DRAWER ══════ -->
+  <div class="cart-overlay" id="cartOverlay"></div>
+
+  <div class="cart-drawer" id="cartDrawer">
+    <div class="cart-drawer__head">
+      <div class="cart-drawer__title">
+        🛒 Tu carro
+        <span class="cart-drawer__count" id="cartCount">4</span>
+      </div>
+      <button class="cart-drawer__close" id="cartClose" aria-label="Cerrar carro">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M18 6 6 18M6 6l12 12"/></svg>
+      </button>
+    </div>
+
+    <div class="cart-drawer__items">
+
+      <!-- Producto 1 -->
+      <div class="cart-item" data-price="14990" data-qty="1">
+        <div class="cart-item__img">
+          <img src="https://cdn.shopify.com/s/files/1/0935/9894/1459/files/Alfombraolfativa60x60.webp?v=1750884402" alt="Alfombra Olfativa" loading="lazy">
+        </div>
+        <div class="cart-item__info">
+          <div class="cart-item__type">Mascotas</div>
+          <div class="cart-item__name">Alfombra Olfativa Interactiva 60 x 60 cm</div>
+          <div class="cart-item__footer">
+            <div class="cart-item__qty">
+              <button class="cart-item__qty-btn" onclick="changeQty(this, -1)">−</button>
+              <span class="cart-item__qty-num">1</span>
+              <button class="cart-item__qty-btn" onclick="changeQty(this, 1)">+</button>
+            </div>
+            <div>
+              <div class="cart-item__price">$14.990</div>
+              <div class="cart-item__price-old">$19.990</div>
+            </div>
+          </div>
+          <span class="cart-item__remove" onclick="removeItem(this)">Eliminar</span>
+        </div>
+      </div>
+
+      <!-- Producto 2 -->
+      <div class="cart-item" data-price="24990" data-qty="1">
+        <div class="cart-item__img">
+          <img src="https://cdn.shopify.com/s/files/1/0935/9894/1459/files/WildMonsteraPecheraA.jpg?v=1749678002" alt="Arnés Pechera Wild Monstera" loading="lazy">
+        </div>
+        <div class="cart-item__info">
+          <div class="cart-item__type">Accesorios</div>
+          <div class="cart-item__name">Arnés Pechera Wild Monstera</div>
+          <div class="cart-item__footer">
+            <div class="cart-item__qty">
+              <button class="cart-item__qty-btn" onclick="changeQty(this, -1)">−</button>
+              <span class="cart-item__qty-num">1</span>
+              <button class="cart-item__qty-btn" onclick="changeQty(this, 1)">+</button>
+            </div>
+            <div>
+              <div class="cart-item__price">$24.990</div>
+            </div>
+          </div>
+          <span class="cart-item__remove" onclick="removeItem(this)">Eliminar</span>
+        </div>
+      </div>
+
+      <!-- Producto 3 -->
+      <div class="cart-item" data-price="7990" data-qty="2">
+        <div class="cart-item__img">
+          <img src="https://cdn.shopify.com/s/files/1/0935/9894/1459/files/X_all-for-paws-treat-hider-green-monster7192.jpg?v=1764865916" alt="AFP Treat Hider Green Monster" loading="lazy">
+        </div>
+        <div class="cart-item__info">
+          <div class="cart-item__type">Juguetes</div>
+          <div class="cart-item__name">AFP Treat Hider Green Monster – Peluche Interactivo</div>
+          <div class="cart-item__footer">
+            <div class="cart-item__qty">
+              <button class="cart-item__qty-btn" onclick="changeQty(this, -1)">−</button>
+              <span class="cart-item__qty-num">2</span>
+              <button class="cart-item__qty-btn" onclick="changeQty(this, 1)">+</button>
+            </div>
+            <div>
+              <div class="cart-item__price">$15.980</div>
+              <div class="cart-item__price-old">$17.980</div>
+            </div>
+          </div>
+          <span class="cart-item__remove" onclick="removeItem(this)">Eliminar</span>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="cart-drawer__foot">
+      <div class="cart-drawer__free-bar">
+        <strong>¡Te faltan $9.030 para envío gratis!</strong> 🚀<br>Agrega un poco más y te lo mandamos sin costo.
+        <div class="cart-drawer__free-progress">
+          <div class="cart-drawer__free-fill" id="freeBar"></div>
+        </div>
+      </div>
+
+      <div class="cart-drawer__totals">
+        <div class="cart-drawer__row">
+          <span>Subtotal (4 productos)</span>
+          <span id="cartSubtotal">$55.960</span>
+        </div>
+        <div class="cart-drawer__row">
+          <span>Envío</span>
+          <span>Calcular en checkout</span>
+        </div>
+        <div class="cart-drawer__row cart-drawer__row--total">
+          <span>Total estimado</span>
+          <span id="cartTotal">$55.960</span>
+        </div>
+      </div>
+
+      <button class="cart-drawer__checkout">
+        Ir al checkout
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+      </button>
+      <div class="cart-drawer__secondary">
+        <a href="#" onclick="closeCart()">← Seguir comprando</a>
+        &nbsp;·&nbsp; Pago 100% seguro 🔒
+      </div>
+    </div>
+  </div>
+
   <script>
     // Scroll reveal
     const obs = new IntersectionObserver(entries =>
@@ -1873,6 +2251,63 @@
     // Nav scroll
     const navEl = document.getElementById('nav');
     window.addEventListener('scroll', () => navEl.classList.toggle('scrolled', scrollY > 40), { passive: true });
+
+    // Cart drawer
+    const overlay = document.getElementById('cartOverlay');
+    const drawer  = document.getElementById('cartDrawer');
+
+    function openCart()  { drawer.classList.add('open'); overlay.classList.add('open'); document.body.style.overflow = 'hidden'; }
+    function closeCart() { drawer.classList.remove('open'); overlay.classList.remove('open'); document.body.style.overflow = ''; }
+
+    document.querySelector('.nav__cart').addEventListener('click', e => { e.preventDefault(); openCart(); });
+    document.getElementById('cartClose').addEventListener('click', closeCart);
+    overlay.addEventListener('click', closeCart);
+    document.addEventListener('keydown', e => { if (e.key === 'Escape') closeCart(); });
+
+    function fmt(n) { return '$' + n.toLocaleString('es-CL'); }
+
+    function recalc() {
+      const items = document.querySelectorAll('.cart-item');
+      let total = 0, count = 0;
+      items.forEach(item => {
+        const qty   = parseInt(item.querySelector('.cart-item__qty-num').textContent);
+        const price = parseInt(item.dataset.price);
+        const line  = price * qty;
+        const priceEl = item.querySelector('.cart-item__price');
+        priceEl.textContent = fmt(line);
+        total += line;
+        count += qty;
+      });
+      document.getElementById('cartSubtotal').textContent = fmt(total);
+      document.getElementById('cartTotal').textContent    = fmt(total);
+      document.getElementById('cartCount').textContent    = count;
+      document.querySelector('.nav__cart').childNodes[document.querySelector('.nav__cart').childNodes.length - 1].textContent = ` Carro (${count})`;
+      const threshold = 30000;
+      const pct = Math.min((total / threshold) * 100, 100);
+      document.getElementById('freeBar').style.width = pct + '%';
+      const foot = document.querySelector('.cart-drawer__free-bar');
+      if (total >= threshold) {
+        foot.innerHTML = '<strong>¡Envío gratis aplicado!</strong> 🚀 Tu pedido califica para despacho sin costo.';
+      } else {
+        const falta = (threshold - total).toLocaleString('es-CL');
+        foot.innerHTML = `<strong>¡Te faltan $${falta} para envío gratis!</strong> 🚀 Agrega un poco más y te lo mandamos sin costo.<div class="cart-drawer__free-progress"><div class="cart-drawer__free-fill" id="freeBar" style="width:${pct}%"></div></div>`;
+      }
+    }
+
+    function changeQty(btn, delta) {
+      const item   = btn.closest('.cart-item');
+      const numEl  = item.querySelector('.cart-item__qty-num');
+      const oldQty = parseInt(numEl.textContent);
+      const newQty = Math.max(1, oldQty + delta);
+      numEl.textContent   = newQty;
+      item.dataset.qty    = newQty;
+      recalc();
+    }
+
+    function removeItem(el) {
+      el.closest('.cart-item').remove();
+      recalc();
+    }
 
     // Drag scroll
     const track = document.getElementById('bsTrack');
