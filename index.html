@@ -503,6 +503,8 @@
 
     .cat-card__bg {
       position: absolute; inset: 0;
+      background-size: cover;
+      background-position: center;
       transition: transform 0.55s var(--ease-out);
     }
     .cat-card:hover .cat-card__bg { transform: scale(1.06); }
@@ -568,20 +570,16 @@
     .p-card__img {
       height: 20rem;
       display: flex; align-items: center; justify-content: center;
-      font-size: 5rem;
       position: relative;
       overflow: hidden;
+      background: var(--off-white);
     }
-    .p-card__img-bg {
-      position: absolute; inset: 0;
+    .p-card__img img {
+      width: 100%; height: 100%;
+      object-fit: cover;
       transition: transform 0.55s var(--ease-out);
     }
-    .p-card:hover .p-card__img-bg { transform: scale(1.04); }
-    .p-card__img-emoji {
-      position: relative; z-index: 1;
-      filter: drop-shadow(0 4px 12px rgba(0,0,0,0.1));
-    }
-    .p-card--featured .p-card__img-emoji { font-size: 8rem; }
+    .p-card:hover .p-card__img img { transform: scale(1.04); }
 
     .p-card__badge {
       position: absolute;
@@ -905,9 +903,16 @@
     .bs-card__img {
       height: 13rem;
       display: flex; align-items: center; justify-content: center;
-      font-size: 4.5rem;
       position: relative;
+      overflow: hidden;
+      background: var(--off-white);
     }
+    .bs-card__img img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+      transition: transform 0.45s var(--ease-out);
+    }
+    .bs-card:hover .bs-card__img img { transform: scale(1.04); }
     .bs-card__rank {
       position: absolute;
       top: 0.8rem; left: 0.8rem;
@@ -1746,8 +1751,8 @@
 
       <div class="hero__card hero__card-1 reveal d3">
         <div class="hero__card-label">✦ Más vendido del mes</div>
-        <div class="hero__card-product">Palitos de Salmón con Arándanos</div>
-        <div class="hero__card-price">$12.990</div>
+        <div class="hero__card-product">Arnés Pechera Wild Monstera</div>
+        <div class="hero__card-price">$24.990</div>
         <button class="hero__card-add">+ Agregar al carro</button>
       </div>
     </div>
@@ -1781,39 +1786,39 @@
 
     <div class="categories__grid">
       <div class="cat-card reveal">
-        <div class="cat-card__bg" style="background:linear-gradient(145deg, var(--sky) 0%, var(--sky-dark) 100%)"></div>
+        <div class="cat-card__bg" style="background-image:url('https://cdn.shopify.com/s/files/1/0935/9894/1459/files/orejas_de_cerdo_1.webp?v=1763133870')"></div>
         <div class="cat-card__overlay"></div>
         <div class="cat-card__body">
           <span class="cat-card__icon">🦴</span>
           <div class="cat-card__name">Snacks & Premios</div>
-          <div class="cat-card__count">42 productos</div>
+          <div class="cat-card__count">12 productos</div>
         </div>
       </div>
       <div class="cat-card reveal d1">
-        <div class="cat-card__bg" style="background:linear-gradient(145deg, #ffb3d0, var(--pink))"></div>
+        <div class="cat-card__bg" style="background-image:url('https://cdn.shopify.com/s/files/1/0935/9894/1459/files/WildMonsteraPecheraA.jpg?v=1749678002')"></div>
         <div class="cat-card__overlay"></div>
         <div class="cat-card__body">
-          <span class="cat-card__icon">🍖</span>
-          <div class="cat-card__name">Alimento Natural</div>
-          <div class="cat-card__count">28 productos</div>
+          <span class="cat-card__icon">🦮</span>
+          <div class="cat-card__name">Arneses & Accesorios</div>
+          <div class="cat-card__count">+160 productos</div>
         </div>
       </div>
       <div class="cat-card reveal d2">
-        <div class="cat-card__bg" style="background:linear-gradient(145deg, #a8d8e0, var(--sky-dark))"></div>
+        <div class="cat-card__bg" style="background-image:url('https://cdn.shopify.com/s/files/1/0935/9894/1459/files/Shampo_Avena.jpg?v=1760108331')"></div>
         <div class="cat-card__overlay"></div>
         <div class="cat-card__body">
           <span class="cat-card__icon">🛁</span>
           <div class="cat-card__name">Higiene & Cuidado</div>
-          <div class="cat-card__count">35 productos</div>
+          <div class="cat-card__count">7 productos</div>
         </div>
       </div>
       <div class="cat-card reveal d3">
-        <div class="cat-card__bg" style="background:linear-gradient(145deg, #ffd6e8, var(--pink-soft))"></div>
+        <div class="cat-card__bg" style="background-image:url('https://cdn.shopify.com/s/files/1/0935/9894/1459/files/foto_1.jpg?v=1764865052')"></div>
         <div class="cat-card__overlay"></div>
         <div class="cat-card__body">
           <span class="cat-card__icon">🎾</span>
           <div class="cat-card__name">Juguetes</div>
-          <div class="cat-card__count">19 productos</div>
+          <div class="cat-card__count">38 productos</div>
         </div>
       </div>
     </div>
@@ -1831,24 +1836,23 @@
 
     <div class="products__grid">
       <div class="p-card p-card--featured reveal">
-        <div class="p-card__img" style="background:linear-gradient(135deg, var(--sky-pale), var(--sky))">
-          <div class="p-card__img-bg" style="background:linear-gradient(135deg, var(--sky-pale), var(--sky))"></div>
-          <span class="p-card__img-emoji">🦴</span>
-          <span class="p-card__badge p-card__badge--sale">-21%</span>
+        <div class="p-card__img">
+          <img src="https://cdn.shopify.com/s/files/1/0935/9894/1459/files/Alfombraolfativa60x60.webp?v=1750884402" alt="Alfombra Olfativa Interactiva 60x60">
+          <span class="p-card__badge p-card__badge--sale">-25%</span>
           <button class="p-card__fav">🤍</button>
         </div>
         <div class="p-card__body">
-          <div class="p-card__cat">Snacks Premium</div>
-          <div class="p-card__name">Palitos de Salmón Deshidratado con Arándanos</div>
-          <div class="p-card__desc">100% natural, sin aditivos. Omega-3 para piel y pelaje radiante. El favorito de Pascual.</div>
+          <div class="p-card__cat">Mascotas</div>
+          <div class="p-card__name">Alfombra Olfativa Interactiva 60 x 60 cm</div>
+          <div class="p-card__desc">Estimulación mental y diversión garantizada. Ideal para razas activas que necesitan desafíos. Lavable a máquina.</div>
           <div class="p-card__stars">
             <span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span>
-            <span class="star-count">(128)</span>
+            <span class="star-count">(94)</span>
           </div>
           <div class="p-card__footer">
             <div>
-              <span class="p-card__price">$12.990</span>
-              <span class="p-card__price-old">$16.500</span>
+              <span class="p-card__price">$14.990</span>
+              <span class="p-card__price-old">$19.990</span>
             </div>
             <button class="p-card__add">+</button>
           </div>
@@ -1856,42 +1860,46 @@
       </div>
 
       <div class="p-card reveal d1">
-        <div class="p-card__img" style="background:linear-gradient(135deg, #ffe4f0, var(--pink-pale))">
-          <div class="p-card__img-bg" style="background:linear-gradient(135deg, #ffe4f0, var(--pink-pale))"></div>
-          <span class="p-card__img-emoji">🍖</span>
-          <span class="p-card__badge p-card__badge--hot">🔥 Popular</span>
+        <div class="p-card__img">
+          <img src="https://cdn.shopify.com/s/files/1/0935/9894/1459/files/cama-harry-pro-beige-y-gris-786679.webp?v=1749677152" alt="Cama Harry">
+          <span class="p-card__badge p-card__badge--sale">-30%</span>
           <button class="p-card__fav">🤍</button>
         </div>
         <div class="p-card__body">
-          <div class="p-card__cat">Alimento Natural</div>
-          <div class="p-card__name">Vacuno Liofilizado 200g</div>
+          <div class="p-card__cat">Pet Beds</div>
+          <div class="p-card__name">Cama Harry – Inspiración Real</div>
           <div class="p-card__stars">
             <span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span>
-            <span class="star-count">(84)</span>
+            <span class="star-count">(61)</span>
           </div>
           <div class="p-card__footer">
-            <span class="p-card__price">$8.990</span>
+            <div>
+              <span class="p-card__price">$34.990</span>
+              <span class="p-card__price-old">$49.990</span>
+            </div>
             <button class="p-card__add">+</button>
           </div>
         </div>
       </div>
 
       <div class="p-card reveal d2">
-        <div class="p-card__img" style="background:linear-gradient(135deg, var(--sky-pale), #c8ecf4)">
-          <div class="p-card__img-bg" style="background:linear-gradient(135deg, var(--sky-pale), #c8ecf4)"></div>
-          <span class="p-card__img-emoji">🛁</span>
+        <div class="p-card__img">
+          <img src="https://cdn.shopify.com/s/files/1/0935/9894/1459/files/Shampo_Avena.jpg?v=1760108331" alt="Coolpet Shampoo Avena">
           <span class="p-card__badge p-card__badge--new">Nuevo</span>
           <button class="p-card__fav">🤍</button>
         </div>
         <div class="p-card__body">
-          <div class="p-card__cat">Higiene</div>
-          <div class="p-card__name">Shampoo Avena & Aloe Vera 500ml</div>
+          <div class="p-card__cat">Higiene & Cuidado</div>
+          <div class="p-card__name">Coolpet Shampoo de Avena Pieles Sensibles</div>
           <div class="p-card__stars">
             <span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star" style="opacity:0.3">★</span>
-            <span class="star-count">(47)</span>
+            <span class="star-count">(38)</span>
           </div>
           <div class="p-card__footer">
-            <span class="p-card__price">$7.490</span>
+            <div>
+              <span class="p-card__price">$7.490</span>
+              <span class="p-card__price-old">$8.990</span>
+            </div>
             <button class="p-card__add">+</button>
           </div>
         </div>
@@ -1981,53 +1989,53 @@
     </div>
     <div class="bestsellers__track" id="bsTrack">
       <div class="bs-card">
-        <div class="bs-card__img" style="background:linear-gradient(135deg, var(--sky-pale), var(--sky))">
-          <span>🎾</span>
+        <div class="bs-card__img">
+          <img src="https://cdn.shopify.com/s/files/1/0935/9894/1459/files/WildMonsteraPecheraA.jpg?v=1749678002" alt="Arnés Pechera Wild Monstera">
           <span class="bs-card__rank">#1</span>
         </div>
         <div class="bs-card__body">
-          <div class="bs-card__name">Kong Classic Talla M</div>
-          <div class="bs-card__footer"><span class="bs-card__price">$9.990</span><button class="bs-card__btn">Agregar</button></div>
+          <div class="bs-card__name">Arnés Pechera Wild Monstera</div>
+          <div class="bs-card__footer"><span class="bs-card__price">$24.990</span><button class="bs-card__btn">Agregar</button></div>
         </div>
       </div>
       <div class="bs-card">
-        <div class="bs-card__img" style="background:linear-gradient(135deg, #ffe4f0, var(--pink-pale))">
-          <span>🦮</span>
+        <div class="bs-card__img">
+          <img src="https://cdn.shopify.com/s/files/1/0935/9894/1459/files/Alfombraolfativa60x60.webp?v=1750884402" alt="Alfombra Olfativa 60x60">
           <span class="bs-card__rank">#2</span>
         </div>
         <div class="bs-card__body">
-          <div class="bs-card__name">Arnés Reflectante Paseo</div>
-          <div class="bs-card__footer"><span class="bs-card__price">$22.990</span><button class="bs-card__btn">Agregar</button></div>
+          <div class="bs-card__name">Alfombra Olfativa 60 x 60 cm</div>
+          <div class="bs-card__footer"><span class="bs-card__price">$14.990</span><button class="bs-card__btn">Agregar</button></div>
         </div>
       </div>
       <div class="bs-card">
-        <div class="bs-card__img" style="background:linear-gradient(135deg, var(--sky-pale), #c8ecf4)">
-          <span>🍗</span>
+        <div class="bs-card__img">
+          <img src="https://cdn.shopify.com/s/files/1/0935/9894/1459/files/cama-harry-pro-beige-y-gris-786679.webp?v=1749677152" alt="Cama Harry">
           <span class="bs-card__rank">#3</span>
         </div>
         <div class="bs-card__body">
-          <div class="bs-card__name">Pollo Deshidratado 150g</div>
-          <div class="bs-card__footer"><span class="bs-card__price">$6.990</span><button class="bs-card__btn">Agregar</button></div>
+          <div class="bs-card__name">Cama Harry – Inspiración Real</div>
+          <div class="bs-card__footer"><span class="bs-card__price">$34.990</span><button class="bs-card__btn">Agregar</button></div>
         </div>
       </div>
       <div class="bs-card">
-        <div class="bs-card__img" style="background:linear-gradient(135deg, #ffe8f4, #ffd6ec)">
-          <span>🛏️</span>
+        <div class="bs-card__img">
+          <img src="https://cdn.shopify.com/s/files/1/0935/9894/1459/files/foto_1.jpg?v=1764865052" alt="AFP Pups Peluche Térmico">
           <span class="bs-card__rank">#4</span>
         </div>
         <div class="bs-card__body">
-          <div class="bs-card__name">Cama Ortopédica Memory Foam M</div>
-          <div class="bs-card__footer"><span class="bs-card__price">$45.990</span><button class="bs-card__btn">Agregar</button></div>
+          <div class="bs-card__name">AFP Pups Peluche Térmico Calmante</div>
+          <div class="bs-card__footer"><span class="bs-card__price">$12.990</span><button class="bs-card__btn">Agregar</button></div>
         </div>
       </div>
       <div class="bs-card">
-        <div class="bs-card__img" style="background:linear-gradient(135deg, var(--sky-pale), var(--sky))">
-          <span>💊</span>
+        <div class="bs-card__img">
+          <img src="https://cdn.shopify.com/s/files/1/0935/9894/1459/files/orejas_de_cerdo_1.webp?v=1763133870" alt="Doggo Snack Orejas de Cerdo">
           <span class="bs-card__rank">#5</span>
         </div>
         <div class="bs-card__body">
-          <div class="bs-card__name">Omega-3 Pelaje Brillante 60 cáp.</div>
-          <div class="bs-card__footer"><span class="bs-card__price">$14.490</span><button class="bs-card__btn">Agregar</button></div>
+          <div class="bs-card__name">🐶 Doggo Snack Orejas de Cerdo</div>
+          <div class="bs-card__footer"><span class="bs-card__price">$3.990</span><button class="bs-card__btn">Agregar</button></div>
         </div>
       </div>
     </div>
