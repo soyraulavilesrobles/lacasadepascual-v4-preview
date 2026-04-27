@@ -1640,32 +1640,144 @@
     /* ══════════════════════════════
        RESPONSIVE
     ══════════════════════════════ */
+    /* ── TABLET ── */
     @media (max-width: 1024px) {
       .hero { grid-template-columns: 1fr; min-height: auto; }
-      .hero__right { height: 65vw; }
-      .hero__card-1 { bottom: 1.5rem; left: 1.5rem; }
+      .hero__right { height: 60vw; }
+      .hero__left { padding: 4rem 3rem 3rem; }
+      .hero__card-1 { bottom: 1.5rem; left: 1.5rem; min-width: 13rem; }
       .products__grid { grid-template-columns: 1fr 1fr; }
       .p-card--featured { grid-column: span 2; grid-template-columns: 1fr; }
-      .p-card--featured .p-card__img { height: 22rem; }
+      .p-card--featured .p-card__img { height: 20rem; }
       .categories__grid { grid-template-columns: repeat(2, 1fr); }
       .brand { grid-template-columns: 1fr; }
-      .brand__visual { height: 55vw; }
+      .brand__visual { height: 50vw; }
       .benefits { grid-template-columns: repeat(2, 1fr); }
       .instagram__grid { grid-template-columns: repeat(3, 1fr); }
       .testimonials__grid { grid-template-columns: 1fr; }
-      .newsletter { grid-template-columns: 1fr; gap: 2.5rem; }
+      .newsletter { grid-template-columns: 1fr; gap: 2rem; }
       .footer__top { grid-template-columns: 1fr 1fr; }
-      section.categories, section.products, .bestsellers, section.instagram,
-      section.newsletter, footer.footer, .benefits { padding-left: 2rem; padding-right: 2rem; }
-      .bestsellers { padding-left: 2rem; }
+      .categories, .products, .testimonials, .instagram, .newsletter { padding: 4rem 2rem; }
+      .bestsellers { padding: 4rem 0 4rem 2rem; }
+      .bestsellers__top { padding-right: 2rem; }
+      .bestsellers__track { padding-right: 2rem; }
+      .footer { padding: 3rem 2rem 2rem; }
+      .benefits { padding: 0; }
+      .brand__content { padding: 3rem 2rem; }
     }
+
+    /* ── MÓVIL ── */
     @media (max-width: 640px) {
+      /* Nav */
+      .nav { padding: 0 1.2rem; height: 3.8rem; }
       .nav__links { display: none; }
-      .products__grid { grid-template-columns: 1fr; }
-      .p-card--featured { grid-column: span 1; }
-      .instagram__grid { grid-template-columns: repeat(2, 1fr); }
-      .footer__top { grid-template-columns: 1fr; }
+      .nav__cart span { display: none; }
+      .nav__cart { padding: 0.5rem 0.9rem; }
+
+      /* Hero */
+      .hero { grid-template-columns: 1fr; }
+      .hero__left {
+        padding: 5rem 1.5rem 2.5rem;
+        order: 1;
+      }
+      .hero__right {
+        height: 72vw;
+        order: 0;
+      }
+      .hero__headline { font-size: clamp(2.8rem, 12vw, 4rem); }
+      .hero__sub { font-size: 0.95rem; }
+      .hero__card-2 { top: 1rem; right: 1rem; padding: 0.7rem 0.9rem; }
+      .hero__card-1 {
+        bottom: 1rem; left: 1rem;
+        min-width: 0; width: calc(100% - 2rem);
+      }
+      .hero__proof { flex-wrap: wrap; gap: 0.6rem; }
+
+      /* Marquee */
+      .marquee__item { font-size: 0.72rem; }
+
+      /* Sections padding */
+      .categories, .products, .testimonials,
+      .instagram, .newsletter { padding: 3rem 1.2rem; }
+      .bestsellers { padding: 3rem 0 3rem 1.2rem; }
+      .bestsellers__top { padding-right: 1.2rem; }
+      .bestsellers__track { padding-right: 1.2rem; }
+
+      /* Section headers */
+      .section-header { flex-direction: column; align-items: flex-start; gap: 1rem; }
+      .section-title { font-size: clamp(1.8rem, 7vw, 2.4rem); }
+
+      /* Categories */
+      .categories__grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 0.7rem;
+      }
+      .cat-card { aspect-ratio: 3/4; }
+      .cat-card__name { font-size: 1rem; }
+
+      /* Products */
+      .products { background: var(--off-white); }
+      .products__grid { grid-template-columns: 1fr; gap: 1rem; }
+      .p-card--featured {
+        grid-column: span 1;
+        grid-template-columns: 1fr;
+      }
+      .p-card--featured .p-card__img { height: 18rem; }
+      .p-card--featured .p-card__body { padding: 1.4rem; }
+      .p-card--featured .p-card__name { font-size: 1.1rem; }
+      .p-card__img { height: 16rem; }
+
+      /* Benefits */
+      .benefits { grid-template-columns: 1fr 1fr; }
+      .benefit { padding: 1.2rem; }
+      .benefit__icon { width: 2.2rem; height: 2.2rem; font-size: 1rem; }
+
+      /* Brand */
+      .brand { grid-template-columns: 1fr; }
+      .brand__visual { height: 60vw; }
+      .brand__emoji-main { font-size: 8rem; }
+      .brand__content { padding: 2.5rem 1.5rem; }
+      .brand__title { font-size: clamp(1.8rem, 6vw, 2.4rem); }
+      .brand__year-badge { width: 4rem; height: 4rem; bottom: 1.5rem; right: 1.5rem; }
+      .brand__year-num { font-size: 1.1rem; }
+
+      /* Bestsellers */
+      .bs-card { width: 13rem; }
+      .bs-card__img { height: 11rem; }
+
+      /* Testimonials */
+      .testimonials__grid { grid-template-columns: 1fr; gap: 1rem; }
+
+      /* Instagram */
+      .instagram__grid { grid-template-columns: repeat(2, 1fr); gap: 0.5rem; }
+      .instagram__header { flex-direction: column; align-items: flex-start; gap: 1rem; }
+
+      /* Newsletter */
+      .newsletter { padding: 3rem 1.2rem; }
+      .nl-form { flex-direction: column; border-radius: 1rem; overflow: visible; border: none; gap: 0.6rem; }
+      .nl-input {
+        border: 1.5px solid rgba(255,255,255,0.12);
+        border-radius: 9rem;
+        padding: 0.9rem 1.2rem;
+      }
+      .nl-btn { border-radius: 9rem; text-align: center; padding: 0.9rem; }
+
+      /* Footer */
+      .footer { padding: 2.5rem 1.2rem 1.5rem; }
+      .footer__top { grid-template-columns: 1fr; gap: 2rem; }
       .footer__bottom { flex-direction: column; gap: 0.4rem; text-align: center; }
+
+      /* Cart drawer */
+      .cart-drawer { width: 100vw; }
+    }
+
+    /* ── MÓVIL PEQUEÑO ── */
+    @media (max-width: 380px) {
+      .hero__headline { font-size: 2.6rem; }
+      .categories__grid { grid-template-columns: repeat(2, 1fr); gap: 0.5rem; }
+      .cat-card__name { font-size: 0.9rem; }
+      .benefits { grid-template-columns: 1fr; }
+      .bs-card { width: 11.5rem; }
     }
   </style>
 </head>
