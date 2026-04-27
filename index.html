@@ -1545,11 +1545,12 @@
     .cart-drawer__secondary a { color: var(--navy); font-weight: 600; text-decoration: underline; }
     .cart-drawer__secondary a:hover { color: var(--pink); }
 
-    /* Cross-sell strip */
+    /* Cross-sell strip — vive dentro del scroll de ítems */
     .cart-cross {
-      flex-shrink: 0;
+      margin: 0.8rem -1.6rem 0;
+      padding: 1rem 1.6rem 0.4rem;
       border-top: 1px solid var(--border);
-      padding: 1rem 1.6rem 0.2rem;
+      background: var(--off-white);
     }
     .cart-cross__title {
       font-size: 0.68rem;
@@ -2272,66 +2273,66 @@
         </div>
       </div>
 
-    </div>
+      <!-- Cross-sell: al final del scroll, visible al bajar -->
+      <div class="cart-cross">
+        <div class="cart-cross__title">También te puede interesar</div>
+        <div class="cart-cross__track">
 
-    <!-- Cross-sell -->
-    <div class="cart-cross">
-      <div class="cart-cross__title">También te puede interesar</div>
-      <div class="cart-cross__track">
-
-        <div class="cart-cross-card">
-          <div class="cart-cross-card__img">
-            <img src="https://cdn.shopify.com/s/files/1/0935/9894/1459/files/foto_1.jpg?v=1764865052" alt="Peluche Térmico Calmante" loading="lazy">
-          </div>
-          <div class="cart-cross-card__body">
-            <div class="cart-cross-card__name">AFP Pups Peluche Térmico Calmante</div>
-            <div class="cart-cross-card__footer">
-              <span class="cart-cross-card__price">$12.990</span>
-              <button class="cart-cross-card__add" onclick="addCross(this, 12990, 'AFP Pups Peluche Térmico Calmante')">+</button>
+          <div class="cart-cross-card">
+            <div class="cart-cross-card__img">
+              <img src="https://cdn.shopify.com/s/files/1/0935/9894/1459/files/foto_1.jpg?v=1764865052" alt="Peluche Térmico Calmante" loading="lazy">
+            </div>
+            <div class="cart-cross-card__body">
+              <div class="cart-cross-card__name">AFP Pups Peluche Térmico Calmante</div>
+              <div class="cart-cross-card__footer">
+                <span class="cart-cross-card__price">$12.990</span>
+                <button class="cart-cross-card__add" onclick="addCross(this, 12990, 'AFP Pups Peluche Térmico Calmante')">+</button>
+              </div>
             </div>
           </div>
-        </div>
 
-        <div class="cart-cross-card">
-          <div class="cart-cross-card__img">
-            <img src="https://cdn.shopify.com/s/files/1/0935/9894/1459/files/ArnesFuzzyardNoSignal.png?v=1751646655" alt="Arnés No Signal FuzzYard" loading="lazy">
-          </div>
-          <div class="cart-cross-card__body">
-            <div class="cart-cross-card__name">Arnés No Signal FuzzYard</div>
-            <div class="cart-cross-card__footer">
-              <span class="cart-cross-card__price">$11.990</span>
-              <button class="cart-cross-card__add" onclick="addCross(this, 11990, 'Arnés No Signal FuzzYard')">+</button>
+          <div class="cart-cross-card">
+            <div class="cart-cross-card__img">
+              <img src="https://cdn.shopify.com/s/files/1/0935/9894/1459/files/ArnesFuzzyardNoSignal.png?v=1751646655" alt="Arnés No Signal FuzzYard" loading="lazy">
+            </div>
+            <div class="cart-cross-card__body">
+              <div class="cart-cross-card__name">Arnés No Signal FuzzYard</div>
+              <div class="cart-cross-card__footer">
+                <span class="cart-cross-card__price">$11.990</span>
+                <button class="cart-cross-card__add" onclick="addCross(this, 11990, 'Arnés No Signal FuzzYard')">+</button>
+              </div>
             </div>
           </div>
-        </div>
 
-        <div class="cart-cross-card">
-          <div class="cart-cross-card__img">
-            <img src="https://cdn.shopify.com/s/files/1/0935/9894/1459/files/all-for-paws-lamb-cuddle-con-nudos.jpg?v=1761317063" alt="Afp Lamb Peluche de Nudos" loading="lazy">
-          </div>
-          <div class="cart-cross-card__body">
-            <div class="cart-cross-card__name">Afp Lamb Peluche de Nudos</div>
-            <div class="cart-cross-card__footer">
-              <span class="cart-cross-card__price">$7.990</span>
-              <button class="cart-cross-card__add" onclick="addCross(this, 7990, 'Afp Lamb Peluche de Nudos')">+</button>
+          <div class="cart-cross-card">
+            <div class="cart-cross-card__img">
+              <img src="https://cdn.shopify.com/s/files/1/0935/9894/1459/files/all-for-paws-lamb-cuddle-con-nudos.jpg?v=1761317063" alt="Afp Lamb Peluche de Nudos" loading="lazy">
+            </div>
+            <div class="cart-cross-card__body">
+              <div class="cart-cross-card__name">Afp Lamb Peluche de Nudos</div>
+              <div class="cart-cross-card__footer">
+                <span class="cart-cross-card__price">$7.990</span>
+                <button class="cart-cross-card__add" onclick="addCross(this, 7990, 'Afp Lamb Peluche de Nudos')">+</button>
+              </div>
             </div>
           </div>
-        </div>
 
-        <div class="cart-cross-card">
-          <div class="cart-cross-card__img">
-            <img src="https://cdn.shopify.com/s/files/1/0935/9894/1459/files/3632F891-F60B-448A-9F65-CB0EA05D4433.png?v=1760028217" alt='Alfombra "Good Boy"' loading="lazy">
-          </div>
-          <div class="cart-cross-card__body">
-            <div class="cart-cross-card__name">Alfombra "Good Boy"</div>
-            <div class="cart-cross-card__footer">
-              <span class="cart-cross-card__price">$2.990</span>
-              <button class="cart-cross-card__add" onclick="addCross(this, 2990, 'Alfombra Good Boy')">+</button>
+          <div class="cart-cross-card">
+            <div class="cart-cross-card__img">
+              <img src="https://cdn.shopify.com/s/files/1/0935/9894/1459/files/3632F891-F60B-448A-9F65-CB0EA05D4433.png?v=1760028217" alt='Alfombra Good Boy' loading="lazy">
+            </div>
+            <div class="cart-cross-card__body">
+              <div class="cart-cross-card__name">Alfombra "Good Boy"</div>
+              <div class="cart-cross-card__footer">
+                <span class="cart-cross-card__price">$2.990</span>
+                <button class="cart-cross-card__add" onclick="addCross(this, 2990, 'Alfombra Good Boy')">+</button>
+              </div>
             </div>
           </div>
-        </div>
 
+        </div>
       </div>
+
     </div>
 
     <div class="cart-drawer__foot">
