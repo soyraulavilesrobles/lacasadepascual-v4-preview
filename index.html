@@ -1666,11 +1666,105 @@
       .brand__content { padding: 3rem 2rem; }
     }
 
+    /* ── MENÚ MÓVIL ── */
+    .nav__burger {
+      display: none;
+      width: 2.2rem; height: 2.2rem;
+      flex-direction: column;
+      justify-content: center;
+      gap: 5px;
+      cursor: pointer;
+      padding: 0.2rem;
+    }
+    .nav__burger span {
+      display: block;
+      height: 2px;
+      background: var(--navy);
+      border-radius: 9rem;
+      transition: transform 0.3s var(--ease-out), opacity 0.2s, width 0.3s;
+    }
+    .nav__burger span:nth-child(2) { width: 70%; }
+    .nav__burger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+    .nav__burger.open span:nth-child(2) { opacity: 0; width: 100%; }
+    .nav__burger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+    .mobile-menu {
+      position: fixed;
+      inset: 0;
+      z-index: 99;
+      background: var(--white);
+      display: flex;
+      flex-direction: column;
+      padding: 5rem 2rem 3rem;
+      transform: translateX(-100%);
+      transition: transform 0.4s var(--ease-out);
+      overflow-y: auto;
+    }
+    .mobile-menu.open { transform: translateX(0); }
+
+    .mobile-menu__links {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+      flex: 1;
+    }
+    .mobile-menu__link {
+      font-family: var(--font-display);
+      font-size: 2rem;
+      font-weight: 700;
+      color: var(--navy);
+      padding: 0.9rem 0;
+      border-bottom: 1px solid var(--border);
+      opacity: 0.85;
+      transition: color 0.2s, opacity 0.2s;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .mobile-menu__link:hover { color: var(--pink); opacity: 1; }
+    .mobile-menu__link span { font-size: 1rem; opacity: 0.3; }
+
+    .mobile-menu__footer {
+      margin-top: 2.5rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.9rem;
+    }
+    .mobile-menu__cta {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      background: var(--pink);
+      color: white;
+      padding: 1rem;
+      border-radius: 9rem;
+      font-size: 1rem;
+      font-weight: 700;
+      box-shadow: 0 6px 20px rgba(255,61,139,0.28);
+    }
+    .mobile-menu__social {
+      display: flex;
+      gap: 0.7rem;
+      justify-content: center;
+    }
+    .mobile-menu__social a {
+      width: 2.5rem; height: 2.5rem;
+      border: 1.5px solid var(--border);
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1rem;
+      color: var(--muted);
+      transition: border-color 0.2s, color 0.2s;
+    }
+    .mobile-menu__social a:hover { border-color: var(--pink); color: var(--pink); }
+
     /* ── MÓVIL ── */
     @media (max-width: 640px) {
       /* Nav */
       .nav { padding: 0 1.2rem; height: 3.8rem; }
       .nav__links { display: none; }
+      .nav__burger { display: flex; }
       .nav__cart span { display: none; }
       .nav__cart { padding: 0.5rem 0.9rem; }
 
@@ -1785,17 +1879,42 @@
 
   <div class="preview-badge">✦ v4 Preview</div>
 
+  <!-- ══════ MENÚ MÓVIL ══════ -->
+  <div class="mobile-menu" id="mobileMenu">
+    <nav class="mobile-menu__links">
+      <a href="#" class="mobile-menu__link" onclick="closeMenu()">Juguetes <span>→</span></a>
+      <a href="#" class="mobile-menu__link" onclick="closeMenu()">Arneses & Accesorios <span>→</span></a>
+      <a href="#" class="mobile-menu__link" onclick="closeMenu()">Higiene & Cuidado <span>→</span></a>
+      <a href="#" class="mobile-menu__link" onclick="closeMenu()">Snacks & Premios <span>→</span></a>
+      <a href="#" class="mobile-menu__link" onclick="closeMenu()" style="color:var(--pink);opacity:1">🔥 Ofertas <span>→</span></a>
+    </nav>
+    <div class="mobile-menu__footer">
+      <a href="#" class="mobile-menu__cta" onclick="closeMenu()">
+        Explorar tienda
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+      </a>
+      <div class="mobile-menu__social">
+        <a href="#">📷</a>
+        <a href="#">🐦</a>
+        <a href="#">📘</a>
+      </div>
+    </div>
+  </div>
+
   <!-- ══════ NAV ══════ -->
   <nav class="nav" id="nav">
+    <button class="nav__burger" id="burger" onclick="toggleMenu()" aria-label="Menú">
+      <span></span><span></span><span></span>
+    </button>
     <a href="#" class="nav__logo">
       <div class="nav__logo-icon">🐾</div>
       La Casa de Pascual
     </a>
     <ul class="nav__links">
-      <li><a href="#">Alimento</a></li>
-      <li><a href="#">Snacks</a></li>
+      <li><a href="#">Juguetes</a></li>
       <li><a href="#">Accesorios</a></li>
       <li><a href="#">Higiene</a></li>
+      <li><a href="#">Snacks</a></li>
       <li><a href="#">Ofertas</a></li>
     </ul>
     <div class="nav__actions">
@@ -2501,6 +2620,21 @@
     // Nav scroll
     const navEl = document.getElementById('nav');
     window.addEventListener('scroll', () => navEl.classList.toggle('scrolled', scrollY > 40), { passive: true });
+
+    // Mobile menu
+    const burger = document.getElementById('burger');
+    const mobileMenu = document.getElementById('mobileMenu');
+    function toggleMenu() {
+      const open = mobileMenu.classList.toggle('open');
+      burger.classList.toggle('open', open);
+      document.body.style.overflow = open ? 'hidden' : '';
+    }
+    function closeMenu() {
+      mobileMenu.classList.remove('open');
+      burger.classList.remove('open');
+      document.body.style.overflow = '';
+    }
+    document.addEventListener('keydown', e => { if (e.key === 'Escape') closeMenu(); });
 
     // Cart drawer
     const overlay = document.getElementById('cartOverlay');
