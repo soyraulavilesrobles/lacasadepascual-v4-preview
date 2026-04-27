@@ -1,0 +1,981 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Checkout — La Casa de Pascual</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,500;0,9..144,700;1,9..144,300;1,9..144,500&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,300&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --pink:        #FF3D8B;
+      --pink-soft:   #FF6EAA;
+      --pink-pale:   #FFF0F6;
+      --pink-border: #FADADF;
+      --sky:         #B9E0E8;
+      --sky-dark:    #7EC8D8;
+      --sky-pale:    #EAF7FA;
+      --sky-deep:    #3AACCA;
+      --navy:        #1A1A2E;
+      --navy-mid:    #2E2E4A;
+      --muted:       #8A8AA0;
+      --white:       #FFFFFF;
+      --off-white:   #FAFBFF;
+      --border:      #EDE8F5;
+      --success:     #22C55E;
+      --font-display: 'Fraunces', Georgia, serif;
+      --font-body:    'DM Sans', system-ui, sans-serif;
+      --ease-out:     cubic-bezier(0.22, 1, 0.36, 1);
+      --spring:       cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { font-size: 16px; scroll-behavior: smooth; }
+    body {
+      background: var(--off-white);
+      color: var(--navy);
+      font-family: var(--font-body);
+      font-weight: 400;
+      line-height: 1.6;
+      min-height: 100vh;
+    }
+    a { color: inherit; text-decoration: none; }
+    button { font-family: inherit; cursor: pointer; border: none; background: none; }
+    input, select { font-family: inherit; }
+
+    /* ── HEADER ── */
+    .co-header {
+      background: var(--white);
+      border-bottom: 1px solid var(--border);
+      padding: 1rem 2rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .co-logo {
+      display: flex;
+      align-items: center;
+      gap: 0.55rem;
+      font-family: var(--font-display);
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--navy);
+    }
+    .co-logo-icon {
+      width: 1.9rem; height: 1.9rem;
+      background: var(--pink);
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 0.9rem;
+      box-shadow: 0 3px 10px rgba(255,61,139,0.3);
+    }
+    .co-header-back {
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+      font-size: 0.82rem;
+      color: var(--muted);
+      transition: color 0.2s;
+    }
+    .co-header-back:hover { color: var(--pink); }
+
+    /* ── STEPS ── */
+    .co-steps {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0;
+      padding: 1.2rem 2rem;
+      background: var(--white);
+      border-bottom: 1px solid var(--border);
+    }
+    .co-step {
+      display: flex;
+      align-items: center;
+      gap: 0.55rem;
+      font-size: 0.8rem;
+      font-weight: 500;
+      color: var(--muted);
+      cursor: pointer;
+      transition: color 0.2s;
+    }
+    .co-step.active { color: var(--navy); font-weight: 600; }
+    .co-step.done   { color: var(--sky-deep); }
+    .co-step__num {
+      width: 1.6rem; height: 1.6rem;
+      border-radius: 50%;
+      border: 1.5px solid var(--border);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 0.72rem;
+      font-weight: 700;
+      flex-shrink: 0;
+      transition: background 0.2s, border-color 0.2s, color 0.2s;
+    }
+    .co-step.active .co-step__num {
+      background: var(--pink);
+      border-color: var(--pink);
+      color: white;
+    }
+    .co-step.done .co-step__num {
+      background: var(--sky-deep);
+      border-color: var(--sky-deep);
+      color: white;
+    }
+    .co-step-divider {
+      width: 2.5rem; height: 1px;
+      background: var(--border);
+      margin: 0 0.5rem;
+    }
+
+    /* ── LAYOUT ── */
+    .co-layout {
+      display: grid;
+      grid-template-columns: 1fr 420px;
+      gap: 0;
+      min-height: calc(100vh - 120px);
+    }
+
+    /* ── FORM PANEL ── */
+    .co-form-panel {
+      padding: 2.5rem 3rem 3rem;
+      max-width: 640px;
+    }
+
+    .co-section {
+      margin-bottom: 2rem;
+    }
+    .co-section-title {
+      font-family: var(--font-display);
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--navy);
+      margin-bottom: 1rem;
+      padding-bottom: 0.6rem;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .co-field-row {
+      display: grid;
+      gap: 0.75rem;
+      margin-bottom: 0.75rem;
+    }
+    .co-field-row.cols-2 { grid-template-columns: 1fr 1fr; }
+    .co-field-row.cols-3 { grid-template-columns: 1fr 1fr 1fr; }
+
+    .co-field {
+      display: flex;
+      flex-direction: column;
+      gap: 0.3rem;
+    }
+    .co-field label {
+      font-size: 0.73rem;
+      font-weight: 600;
+      color: var(--muted);
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+    }
+    .co-field input,
+    .co-field select {
+      border: 1.5px solid var(--border);
+      border-radius: 0.65rem;
+      padding: 0.75rem 1rem;
+      font-size: 0.92rem;
+      color: var(--navy);
+      background: var(--white);
+      outline: none;
+      transition: border-color 0.2s, box-shadow 0.2s;
+      width: 100%;
+      appearance: none;
+    }
+    .co-field input:focus,
+    .co-field select:focus {
+      border-color: var(--pink);
+      box-shadow: 0 0 0 3px rgba(255,61,139,0.08);
+    }
+    .co-field input.filled { border-color: var(--border); background: var(--off-white); }
+    .co-field select { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%238A8AA0' stroke-width='2.5'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 1rem center; padding-right: 2.5rem; }
+
+    /* ── SHIPPING OPTIONS ── */
+    .co-shipping-opts {
+      display: flex;
+      flex-direction: column;
+      gap: 0.6rem;
+    }
+    .co-ship-opt {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0.9rem 1.1rem;
+      border: 1.5px solid var(--border);
+      border-radius: 0.75rem;
+      cursor: pointer;
+      transition: border-color 0.2s, background 0.2s;
+    }
+    .co-ship-opt.selected {
+      border-color: var(--pink);
+      background: var(--pink-pale);
+    }
+    .co-ship-opt__left {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+    .co-ship-opt__radio {
+      width: 1.1rem; height: 1.1rem;
+      border-radius: 50%;
+      border: 2px solid var(--border);
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
+      transition: border-color 0.2s;
+    }
+    .co-ship-opt.selected .co-ship-opt__radio {
+      border-color: var(--pink);
+    }
+    .co-ship-opt__radio-dot {
+      width: 0.5rem; height: 0.5rem;
+      border-radius: 50%;
+      background: var(--pink);
+      opacity: 0;
+      transition: opacity 0.15s;
+    }
+    .co-ship-opt.selected .co-ship-opt__radio-dot { opacity: 1; }
+    .co-ship-opt__name { font-size: 0.88rem; font-weight: 600; color: var(--navy); }
+    .co-ship-opt__detail { font-size: 0.75rem; color: var(--muted); margin-top: 0.05rem; }
+    .co-ship-opt__price { font-size: 0.92rem; font-weight: 700; color: var(--navy); }
+    .co-ship-opt__price.free { color: var(--success); }
+
+    /* ── PAYMENT OPTIONS ── */
+    .co-pay-tabs {
+      display: flex;
+      gap: 0.6rem;
+      margin-bottom: 1.2rem;
+    }
+    .co-pay-tab {
+      flex: 1;
+      padding: 0.85rem 1rem;
+      border: 1.5px solid var(--border);
+      border-radius: 0.75rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.35rem;
+      cursor: pointer;
+      transition: border-color 0.2s, background 0.2s;
+    }
+    .co-pay-tab.selected { border-color: var(--pink); background: var(--pink-pale); }
+    .co-pay-tab__icon { font-size: 1.4rem; }
+    .co-pay-tab__label { font-size: 0.73rem; font-weight: 600; color: var(--navy); text-align: center; line-height: 1.2; }
+
+    .co-webpay-box {
+      border: 1.5px solid var(--border);
+      border-radius: 0.75rem;
+      overflow: hidden;
+    }
+    .co-webpay-head {
+      background: #003087;
+      padding: 0.9rem 1.2rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      color: white;
+    }
+    .co-webpay-head-title { font-size: 0.82rem; font-weight: 600; letter-spacing: 0.02em; }
+    .co-webpay-logo {
+      background: white;
+      color: #003087;
+      font-size: 0.65rem;
+      font-weight: 800;
+      padding: 0.25rem 0.6rem;
+      border-radius: 0.3rem;
+      letter-spacing: 0.04em;
+    }
+    .co-webpay-body { padding: 1.2rem; background: var(--white); }
+    .co-webpay-cards {
+      display: flex;
+      gap: 0.5rem;
+      margin-bottom: 1rem;
+      flex-wrap: wrap;
+    }
+    .co-webpay-card-badge {
+      padding: 0.25rem 0.7rem;
+      border: 1px solid var(--border);
+      border-radius: 0.4rem;
+      font-size: 0.68rem;
+      font-weight: 600;
+      color: var(--muted);
+    }
+
+    .co-transfer-box {
+      border: 1.5px solid var(--border);
+      border-radius: 0.75rem;
+      padding: 1.2rem;
+      background: var(--white);
+      display: none;
+    }
+    .co-transfer-box.active { display: block; }
+    .co-transfer-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0.5rem 0;
+      border-bottom: 1px solid var(--border);
+      font-size: 0.85rem;
+    }
+    .co-transfer-row:last-child { border-bottom: none; }
+    .co-transfer-row span:first-child { color: var(--muted); }
+    .co-transfer-row span:last-child { font-weight: 600; color: var(--navy); }
+
+    .co-discount-row {
+      display: flex;
+      gap: 0.6rem;
+      margin-bottom: 1rem;
+    }
+    .co-discount-input {
+      flex: 1;
+      border: 1.5px solid var(--border);
+      border-radius: 0.65rem;
+      padding: 0.7rem 1rem;
+      font-size: 0.88rem;
+      color: var(--navy);
+      outline: none;
+      transition: border-color 0.2s;
+    }
+    .co-discount-input:focus { border-color: var(--pink); }
+    .co-discount-btn {
+      background: var(--navy);
+      color: white;
+      padding: 0.7rem 1.3rem;
+      border-radius: 0.65rem;
+      font-size: 0.83rem;
+      font-weight: 600;
+      transition: background 0.2s;
+      white-space: nowrap;
+    }
+    .co-discount-btn:hover { background: var(--pink); }
+
+    /* ── CTA ── */
+    .co-cta {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      background: var(--pink);
+      color: white;
+      padding: 1.05rem;
+      border-radius: 9rem;
+      font-size: 1rem;
+      font-weight: 700;
+      box-shadow: 0 6px 20px rgba(255,61,139,0.28);
+      width: 100%;
+      transition: transform 0.2s var(--spring), box-shadow 0.2s, background 0.2s;
+      margin-top: 1.5rem;
+    }
+    .co-cta:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 10px 28px rgba(255,61,139,0.38);
+    }
+    .co-secure-note {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      font-size: 0.73rem;
+      color: var(--muted);
+      margin-top: 0.8rem;
+    }
+
+    /* ── SUMMARY PANEL ── */
+    .co-summary {
+      background: var(--white);
+      border-left: 1px solid var(--border);
+      padding: 2rem 2rem 3rem;
+      position: sticky;
+      top: 0;
+      height: 100vh;
+      overflow-y: auto;
+      scrollbar-width: thin;
+    }
+
+    .co-summary-title {
+      font-family: var(--font-display);
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: var(--navy);
+      margin-bottom: 1.4rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .co-summary-toggle {
+      font-family: var(--font-body);
+      font-size: 0.78rem;
+      font-weight: 500;
+      color: var(--sky-deep);
+      cursor: pointer;
+    }
+
+    .co-sum-items { display: flex; flex-direction: column; gap: 1rem; margin-bottom: 1.4rem; }
+    .co-sum-item {
+      display: flex;
+      gap: 0.85rem;
+      align-items: flex-start;
+    }
+    .co-sum-item__img {
+      position: relative;
+      flex-shrink: 0;
+    }
+    .co-sum-item__img img {
+      width: 4rem; height: 4rem;
+      border-radius: 0.6rem;
+      object-fit: cover;
+      border: 1px solid var(--border);
+    }
+    .co-sum-item__qty {
+      position: absolute;
+      top: -0.4rem; right: -0.4rem;
+      background: var(--muted);
+      color: white;
+      width: 1.15rem; height: 1.15rem;
+      border-radius: 50%;
+      font-size: 0.6rem;
+      font-weight: 700;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .co-sum-item__name {
+      font-size: 0.82rem;
+      font-weight: 600;
+      color: var(--navy);
+      line-height: 1.3;
+      flex: 1;
+    }
+    .co-sum-item__price {
+      font-size: 0.88rem;
+      font-weight: 700;
+      color: var(--navy);
+      white-space: nowrap;
+    }
+    .co-sum-item__old {
+      font-size: 0.72rem;
+      color: var(--muted);
+      text-decoration: line-through;
+      font-weight: 300;
+    }
+
+    .co-sum-divider { height: 1px; background: var(--border); margin: 1.2rem 0; }
+
+    .co-sum-rows { display: flex; flex-direction: column; gap: 0.55rem; }
+    .co-sum-row {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.83rem;
+      color: var(--muted);
+    }
+    .co-sum-row--total {
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: var(--navy);
+      padding-top: 0.6rem;
+      margin-top: 0.3rem;
+      border-top: 2px solid var(--border);
+    }
+    .co-sum-row--total span:last-child {
+      font-family: var(--font-display);
+      font-size: 1.25rem;
+    }
+    .co-sum-row--savings { color: var(--success); font-weight: 500; }
+
+    .co-sum-trust {
+      margin-top: 1.5rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+    .co-sum-trust-item {
+      display: flex;
+      align-items: center;
+      gap: 0.55rem;
+      font-size: 0.75rem;
+      color: var(--muted);
+    }
+
+    /* ── PREVIEW BADGE ── */
+    .preview-badge {
+      position: fixed;
+      bottom: 1.5rem; right: 1.5rem;
+      z-index: 200;
+      background: var(--pink);
+      color: white;
+      padding: 0.5rem 1.2rem;
+      border-radius: 9rem;
+      font-size: 0.72rem;
+      font-weight: 600;
+      box-shadow: 0 4px 20px rgba(255,61,139,0.35);
+      letter-spacing: 0.04em;
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 900px) {
+      .co-layout { grid-template-columns: 1fr; }
+      .co-summary {
+        position: static;
+        height: auto;
+        border-left: none;
+        border-top: 1px solid var(--border);
+        order: -1;
+      }
+      .co-form-panel { padding: 1.5rem; }
+      .co-field-row.cols-3 { grid-template-columns: 1fr 1fr; }
+    }
+    @media (max-width: 560px) {
+      .co-field-row.cols-2 { grid-template-columns: 1fr; }
+      .co-steps { gap: 0; }
+      .co-step span:not(.co-step__num) { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="preview-badge">✦ v4 Preview — Checkout</div>
+
+  <!-- HEADER -->
+  <header class="co-header">
+    <a href="index.html" class="co-logo">
+      <div class="co-logo-icon">🐾</div>
+      La Casa de Pascual
+    </a>
+    <a href="index.html" class="co-header-back">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M19 12H5"/><path d="m12 5-7 7 7 7"/></svg>
+      Volver a la tienda
+    </a>
+  </header>
+
+  <!-- STEPS -->
+  <div class="co-steps">
+    <div class="co-step done" onclick="showStep(1)">
+      <div class="co-step__num"><div class="co-step__radio-dot"></div>✓</div>
+      <span>Contacto</span>
+    </div>
+    <div class="co-step-divider"></div>
+    <div class="co-step active" onclick="showStep(2)">
+      <div class="co-step__num">2</div>
+      <span>Envío</span>
+    </div>
+    <div class="co-step-divider"></div>
+    <div class="co-step" onclick="showStep(3)">
+      <div class="co-step__num">3</div>
+      <span>Pago</span>
+    </div>
+  </div>
+
+  <!-- LAYOUT -->
+  <div class="co-layout">
+
+    <!-- FORM -->
+    <div class="co-form-panel">
+
+      <!-- CONTACT (step 1 — pre-filled, shown as done) -->
+      <div class="co-section" id="step1">
+        <div class="co-section-title">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+          Información de contacto
+        </div>
+        <div class="co-field-row cols-2">
+          <div class="co-field">
+            <label>Nombre</label>
+            <input type="text" value="María José" class="filled" readonly>
+          </div>
+          <div class="co-field">
+            <label>Apellido</label>
+            <input type="text" value="González" class="filled" readonly>
+          </div>
+        </div>
+        <div class="co-field-row">
+          <div class="co-field">
+            <label>Email</label>
+            <input type="email" value="majo@gmail.com" class="filled" readonly>
+          </div>
+        </div>
+        <div class="co-field-row">
+          <div class="co-field">
+            <label>Teléfono</label>
+            <input type="tel" value="+56 9 8765 4321" class="filled" readonly>
+          </div>
+        </div>
+      </div>
+
+      <!-- SHIPPING (step 2 — active) -->
+      <div class="co-section" id="step2">
+        <div class="co-section-title">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 17H3a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11a2 2 0 0 1 2 2v3"/><rect x="9" y="11" width="14" height="10" rx="1"/><circle cx="12" cy="21" r="1"/><circle cx="20" cy="21" r="1"/></svg>
+          Dirección de envío
+        </div>
+        <div class="co-field-row">
+          <div class="co-field">
+            <label>Región</label>
+            <select id="regionSelect" onchange="updateShipping()">
+              <option value="rm" selected>Región Metropolitana</option>
+              <option value="other">Valparaíso</option>
+              <option value="other">O'Higgins</option>
+              <option value="other">Maule</option>
+              <option value="other">Biobío</option>
+              <option value="other">Araucanía</option>
+              <option value="other">Los Lagos</option>
+              <option value="other">Los Ríos</option>
+              <option value="other">Coquimbo</option>
+              <option value="other">Atacama</option>
+              <option value="other">Antofagasta</option>
+              <option value="other">Tarapacá</option>
+              <option value="other">Arica y Parinacota</option>
+              <option value="other">Aysén</option>
+              <option value="magallanes">Magallanes</option>
+            </select>
+          </div>
+        </div>
+        <div class="co-field-row">
+          <div class="co-field">
+            <label>Dirección</label>
+            <input type="text" placeholder="Nombre de la calle y número">
+          </div>
+        </div>
+        <div class="co-field-row cols-2">
+          <div class="co-field">
+            <label>Depto / Casa (opcional)</label>
+            <input type="text" placeholder="Depto, casa, oficina…">
+          </div>
+          <div class="co-field">
+            <label>Comuna</label>
+            <input type="text" placeholder="Ej: Ñuñoa">
+          </div>
+        </div>
+        <div class="co-field-row cols-2">
+          <div class="co-field">
+            <label>Ciudad</label>
+            <input type="text" placeholder="Ej: Santiago">
+          </div>
+          <div class="co-field">
+            <label>Código postal (opcional)</label>
+            <input type="text" placeholder="7 dígitos">
+          </div>
+        </div>
+
+        <!-- Shipping method -->
+        <div class="co-section-title" style="margin-top:1.5rem">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 18V6a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2v11a1 1 0 0 0 1 1h2"/><path d="M15 18H9"/><path d="M19 18h2a1 1 0 0 0 1-1v-3.65a1 1 0 0 0-.22-.624l-3.48-4.35A1 1 0 0 0 17.52 8H14"/><circle cx="17" cy="18" r="2"/><circle cx="7" cy="18" r="2"/></svg>
+          Método de envío
+        </div>
+        <div class="co-shipping-opts">
+          <div class="co-ship-opt selected" onclick="selectShipping(this, 3500)" id="shipStd">
+            <div class="co-ship-opt__left">
+              <div class="co-ship-opt__radio"><div class="co-ship-opt__radio-dot"></div></div>
+              <div>
+                <div class="co-ship-opt__name">Paket.cl — Despacho a domicilio</div>
+                <div class="co-ship-opt__detail" id="shipStdDetail">Entrega en 1-2 días hábiles · RM</div>
+              </div>
+            </div>
+            <div class="co-ship-opt__price" id="shipStdPrice">$3.500</div>
+          </div>
+          <div class="co-ship-opt" onclick="selectShipping(this, 0)" id="shipFree" style="display:none">
+            <div class="co-ship-opt__left">
+              <div class="co-ship-opt__radio"><div class="co-ship-opt__radio-dot"></div></div>
+              <div>
+                <div class="co-ship-opt__name">Envío gratis 🎉</div>
+                <div class="co-ship-opt__detail">Tu pedido califica para despacho sin costo</div>
+              </div>
+            </div>
+            <div class="co-ship-opt__price free">Gratis</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- PAYMENT (step 3) -->
+      <div class="co-section" id="step3">
+        <div class="co-section-title">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="1" y="4" width="22" height="16" rx="2"/><path d="M1 10h22"/></svg>
+          Método de pago
+        </div>
+
+        <div class="co-pay-tabs">
+          <div class="co-pay-tab selected" onclick="selectPayment('webpay')">
+            <div class="co-pay-tab__icon">💳</div>
+            <div class="co-pay-tab__label">Tarjeta / Webpay</div>
+          </div>
+          <div class="co-pay-tab" onclick="selectPayment('transfer')">
+            <div class="co-pay-tab__icon">🏦</div>
+            <div class="co-pay-tab__label">Transferencia bancaria</div>
+          </div>
+        </div>
+
+        <div id="payWebpay">
+          <div class="co-webpay-box">
+            <div class="co-webpay-head">
+              <div class="co-webpay-head-title">Pago seguro con WebPay Plus</div>
+              <div class="co-webpay-logo">WEBPAY</div>
+            </div>
+            <div class="co-webpay-body">
+              <div class="co-webpay-cards">
+                <span class="co-webpay-card-badge">Visa</span>
+                <span class="co-webpay-card-badge">Mastercard</span>
+                <span class="co-webpay-card-badge">Redcompra</span>
+                <span class="co-webpay-card-badge">American Express</span>
+                <span class="co-webpay-card-badge">Cuotas sin interés</span>
+              </div>
+              <div class="co-field-row">
+                <div class="co-field">
+                  <label>Número de tarjeta</label>
+                  <input type="text" placeholder="1234 5678 9012 3456" maxlength="19" oninput="formatCard(this)">
+                </div>
+              </div>
+              <div class="co-field-row cols-2">
+                <div class="co-field">
+                  <label>Vencimiento</label>
+                  <input type="text" placeholder="MM / AA" maxlength="7">
+                </div>
+                <div class="co-field">
+                  <label>CVV</label>
+                  <input type="text" placeholder="123" maxlength="4">
+                </div>
+              </div>
+              <div class="co-field-row">
+                <div class="co-field">
+                  <label>Nombre en la tarjeta</label>
+                  <input type="text" placeholder="Como aparece en tu tarjeta">
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div id="payTransfer" class="co-transfer-box">
+          <p style="font-size:0.85rem;color:var(--muted);margin-bottom:1rem;font-weight:300;line-height:1.6">
+            Realiza la transferencia a los siguientes datos y envíanos el comprobante por Instagram <strong>@lacasadepascual.cl</strong>. Tu pedido se procesa al confirmar el pago.
+          </p>
+          <div class="co-transfer-row">
+            <span>Banco</span><span>Banco de Chile</span>
+          </div>
+          <div class="co-transfer-row">
+            <span>Nombre</span><span>La Casa de Pascual SpA</span>
+          </div>
+          <div class="co-transfer-row">
+            <span>RUT</span><span>77.XXX.XXX-X</span>
+          </div>
+          <div class="co-transfer-row">
+            <span>Tipo de cuenta</span><span>Cuenta Corriente</span>
+          </div>
+          <div class="co-transfer-row">
+            <span>N° de cuenta</span><span>XXXX-XXXX-XX</span>
+          </div>
+          <div class="co-transfer-row">
+            <span>Email</span><span>lcdpascual@gmail.com</span>
+          </div>
+        </div>
+
+        <!-- Discount code -->
+        <div style="margin-top:1.2rem">
+          <div style="font-size:0.73rem;font-weight:600;color:var(--muted);letter-spacing:0.04em;text-transform:uppercase;margin-bottom:0.5rem">Código de descuento</div>
+          <div class="co-discount-row">
+            <input type="text" class="co-discount-input" placeholder="Ej: BIENVENIDO10" id="discountInput">
+            <button class="co-discount-btn" onclick="applyDiscount()">Aplicar</button>
+          </div>
+          <div id="discountMsg" style="font-size:0.78rem;display:none"></div>
+        </div>
+      </div>
+
+      <button class="co-cta" onclick="placeOrder()">
+        Confirmar pedido
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+      </button>
+      <div class="co-secure-note">
+        🔒 Pago seguro y encriptado · Devolución sin preguntas en 30 días
+      </div>
+    </div>
+
+    <!-- SUMMARY -->
+    <aside class="co-summary">
+      <div class="co-summary-title">
+        Resumen de tu pedido
+        <span class="co-summary-toggle">3 productos</span>
+      </div>
+
+      <div class="co-sum-items">
+        <div class="co-sum-item">
+          <div class="co-sum-item__img">
+            <img src="https://cdn.shopify.com/s/files/1/0935/9894/1459/files/Alfombraolfativa60x60.webp?v=1750884402" alt="Alfombra Olfativa">
+            <span class="co-sum-item__qty">1</span>
+          </div>
+          <div class="co-sum-item__name">Alfombra Olfativa Interactiva 60 x 60 cm</div>
+          <div>
+            <div class="co-sum-item__price">$14.990</div>
+            <div class="co-sum-item__old">$19.990</div>
+          </div>
+        </div>
+        <div class="co-sum-item">
+          <div class="co-sum-item__img">
+            <img src="https://cdn.shopify.com/s/files/1/0935/9894/1459/files/WildMonsteraPecheraA.jpg?v=1749678002" alt="Arnés Pechera Wild Monstera">
+            <span class="co-sum-item__qty">1</span>
+          </div>
+          <div class="co-sum-item__name">Arnés Pechera Wild Monstera</div>
+          <div>
+            <div class="co-sum-item__price">$24.990</div>
+          </div>
+        </div>
+        <div class="co-sum-item">
+          <div class="co-sum-item__img">
+            <img src="https://cdn.shopify.com/s/files/1/0935/9894/1459/files/X_all-for-paws-treat-hider-green-monster7192.jpg?v=1764865916" alt="AFP Treat Hider Green Monster">
+            <span class="co-sum-item__qty">2</span>
+          </div>
+          <div class="co-sum-item__name">AFP Treat Hider Green Monster – Peluche Interactivo</div>
+          <div>
+            <div class="co-sum-item__price">$15.980</div>
+            <div class="co-sum-item__old">$17.980</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="co-sum-divider"></div>
+
+      <div class="co-sum-rows">
+        <div class="co-sum-row">
+          <span>Subtotal</span>
+          <span>$55.960</span>
+        </div>
+        <div class="co-sum-row co-sum-row--savings">
+          <span>Ahorro total</span>
+          <span>-$6.990</span>
+        </div>
+        <div class="co-sum-row" id="shippingRow">
+          <span>Envío (RM · Paket.cl)</span>
+          <span id="shippingSummary">$3.500</span>
+        </div>
+        <div class="co-sum-row" id="discountRow" style="display:none;color:var(--success)">
+          <span id="discountLabel">Descuento</span>
+          <span id="discountAmt"></span>
+        </div>
+        <div class="co-sum-row co-sum-row--total">
+          <span>Total</span>
+          <span id="grandTotal">$59.460</span>
+        </div>
+      </div>
+
+      <div class="co-sum-divider"></div>
+
+      <div class="co-sum-trust">
+        <div class="co-sum-trust-item">🚀 <span>Despacho en 1-2 días hábiles en Santiago</span></div>
+        <div class="co-sum-trust-item">🔒 <span>Transacción 100% segura con Webpay Plus</span></div>
+        <div class="co-sum-trust-item">🌿 <span>Empaques sustentables en cada pedido</span></div>
+        <div class="co-sum-trust-item">💬 <span>Soporte por Instagram @lacasadepascual.cl</span></div>
+      </div>
+    </aside>
+
+  </div>
+
+  <script>
+    const SUBTOTAL   = 55960;
+    const SAVINGS    = 6990;
+    let   shipping   = 3500;
+    let   discount   = 0;
+
+    function fmt(n) { return '$' + n.toLocaleString('es-CL'); }
+
+    function recalcTotal() {
+      const total = SUBTOTAL + shipping - discount;
+      document.getElementById('grandTotal').textContent = fmt(total);
+    }
+
+    function updateShipping() {
+      const val = document.getElementById('regionSelect').value;
+      const stdOpt = document.getElementById('shipStd');
+      const stdDetail = document.getElementById('shipStdDetail');
+      const stdPrice  = document.getElementById('shipStdPrice');
+
+      if (SUBTOTAL - discount >= 30000) {
+        document.getElementById('shipFree').style.display = 'flex';
+        shipping = 0;
+        selectShipping(document.getElementById('shipFree'), 0);
+        document.getElementById('shippingRow').innerHTML = `<span>Envío</span><span style="color:var(--success)">Gratis 🎉</span>`;
+      } else {
+        document.getElementById('shipFree').style.display = 'none';
+        if (val === 'magallanes') {
+          shipping = 6500;
+          stdDetail.textContent = 'Entrega en 5-8 días hábiles · Blue.cl';
+          stdPrice.textContent  = '$6.500';
+          document.getElementById('shippingRow').innerHTML = `<span>Envío (Magallanes · Blue.cl)</span><span id="shippingSummary">$6.500</span>`;
+        } else if (val === 'rm') {
+          shipping = 3500;
+          stdDetail.textContent = 'Entrega en 1-2 días hábiles · Paket.cl';
+          stdPrice.textContent  = '$3.500';
+          document.getElementById('shippingRow').innerHTML = `<span>Envío (RM · Paket.cl)</span><span id="shippingSummary">$3.500</span>`;
+        } else {
+          shipping = 4500;
+          stdDetail.textContent = 'Entrega en 2-4 días hábiles · Paket.cl / Blue.cl';
+          stdPrice.textContent  = '$4.500';
+          document.getElementById('shippingRow').innerHTML = `<span>Envío (Regiones · Paket.cl)</span><span id="shippingSummary">$4.500</span>`;
+        }
+      }
+      recalcTotal();
+    }
+
+    function selectShipping(el, price) {
+      document.querySelectorAll('.co-ship-opt').forEach(o => o.classList.remove('selected'));
+      el.classList.add('selected');
+      shipping = price;
+      recalcTotal();
+    }
+
+    function selectPayment(method) {
+      document.querySelectorAll('.co-pay-tab').forEach(t => t.classList.remove('selected'));
+      event.currentTarget.classList.add('selected');
+      document.getElementById('payWebpay').style.display  = method === 'webpay'   ? 'block' : 'none';
+      document.getElementById('payTransfer').classList.toggle('active', method === 'transfer');
+    }
+
+    function applyDiscount() {
+      const code = document.getElementById('discountInput').value.trim().toUpperCase();
+      const msg  = document.getElementById('discountMsg');
+      if (code === 'BIENVENIDO10' || code === 'PASCUAL10') {
+        discount = Math.round(SUBTOTAL * 0.1);
+        document.getElementById('discountRow').style.display = 'flex';
+        document.getElementById('discountLabel').textContent = `Código: ${code}`;
+        document.getElementById('discountAmt').textContent   = '-' + fmt(discount);
+        msg.style.display = 'block';
+        msg.style.color   = 'var(--success)';
+        msg.textContent   = '✓ Descuento aplicado — 10% off';
+        recalcTotal();
+        updateShipping();
+      } else if (code === '') {
+        msg.style.display = 'none';
+      } else {
+        msg.style.display = 'block';
+        msg.style.color   = 'var(--pink)';
+        msg.textContent   = '✗ Código no válido o expirado';
+      }
+    }
+
+    function formatCard(input) {
+      let v = input.value.replace(/\D/g, '').substring(0, 16);
+      input.value = v.replace(/(.{4})/g, '$1 ').trim();
+    }
+
+    function showStep(n) {
+      document.querySelectorAll('.co-step').forEach((s, i) => {
+        s.classList.remove('active', 'done');
+        if (i + 1 < n) s.classList.add('done');
+        if (i + 1 === n) s.classList.add('active');
+      });
+    }
+
+    function placeOrder() {
+      const btn = document.querySelector('.co-cta');
+      btn.textContent = '✓ ¡Pedido confirmado! Redirigiendo…';
+      btn.style.background = 'var(--success)';
+    }
+
+    // Init
+    recalcTotal();
+  </script>
+</body>
+</html>
