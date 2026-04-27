@@ -271,37 +271,38 @@
     .co-pay-tab__icon { font-size: 1.4rem; }
     .co-pay-tab__label { font-size: 0.73rem; font-weight: 600; color: var(--navy); text-align: center; line-height: 1.2; }
 
-    .co-webpay-box {
+    /* MercadoPago */
+    .co-mp-box {
       border: 1.5px solid var(--border);
       border-radius: 0.75rem;
       overflow: hidden;
     }
-    .co-webpay-head {
-      background: #003087;
+    .co-mp-head {
+      background: #009EE3;
       padding: 0.9rem 1.2rem;
       display: flex;
       align-items: center;
       justify-content: space-between;
       color: white;
     }
-    .co-webpay-head-title { font-size: 0.82rem; font-weight: 600; letter-spacing: 0.02em; }
-    .co-webpay-logo {
+    .co-mp-head-title { font-size: 0.82rem; font-weight: 600; }
+    .co-mp-logo {
       background: white;
-      color: #003087;
-      font-size: 0.65rem;
+      color: #009EE3;
+      font-size: 0.62rem;
       font-weight: 800;
-      padding: 0.25rem 0.6rem;
+      padding: 0.25rem 0.65rem;
       border-radius: 0.3rem;
-      letter-spacing: 0.04em;
+      letter-spacing: 0.03em;
     }
-    .co-webpay-body { padding: 1.2rem; background: var(--white); }
-    .co-webpay-cards {
+    .co-mp-body { padding: 1.2rem; background: var(--white); }
+    .co-mp-cards {
       display: flex;
       gap: 0.5rem;
       margin-bottom: 1rem;
       flex-wrap: wrap;
     }
-    .co-webpay-card-badge {
+    .co-mp-card-badge {
       padding: 0.25rem 0.7rem;
       border: 1px solid var(--border);
       border-radius: 0.4rem;
@@ -309,6 +310,61 @@
       font-weight: 600;
       color: var(--muted);
     }
+    .co-mp-installments {
+      margin-top: 0.75rem;
+      background: #f0f9ff;
+      border: 1px solid #bae6fd;
+      border-radius: 0.55rem;
+      padding: 0.65rem 1rem;
+      font-size: 0.78rem;
+      color: #0369a1;
+      font-weight: 500;
+    }
+
+    /* Order bump / upsell */
+    .co-upsell {
+      border: 2px dashed var(--pink-border);
+      border-radius: 0.9rem;
+      padding: 1rem 1.1rem;
+      margin-top: 1.5rem;
+      display: flex;
+      gap: 0.9rem;
+      align-items: center;
+      background: var(--pink-pale);
+      transition: border-color 0.2s, background 0.2s;
+    }
+    .co-upsell.checked { border-color: var(--pink); border-style: solid; background: #fff0f6; }
+    .co-upsell__img {
+      width: 4rem; height: 4rem;
+      border-radius: 0.6rem;
+      overflow: hidden;
+      flex-shrink: 0;
+      border: 1px solid var(--pink-border);
+    }
+    .co-upsell__img img { width: 100%; height: 100%; object-fit: cover; }
+    .co-upsell__info { flex: 1; }
+    .co-upsell__tag {
+      font-size: 0.6rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--pink);
+      margin-bottom: 0.15rem;
+    }
+    .co-upsell__name { font-size: 0.83rem; font-weight: 600; color: var(--navy); line-height: 1.25; }
+    .co-upsell__price { font-size: 0.82rem; color: var(--muted); margin-top: 0.15rem; }
+    .co-upsell__price strong { color: var(--pink); font-weight: 700; }
+    .co-upsell__check {
+      width: 1.5rem; height: 1.5rem;
+      border: 2px solid var(--pink-border);
+      border-radius: 0.35rem;
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
+      cursor: pointer;
+      transition: background 0.2s, border-color 0.2s;
+      font-size: 0.85rem;
+    }
+    .co-upsell.checked .co-upsell__check { background: var(--pink); border-color: var(--pink); color: white; }
 
     .co-transfer-box {
       border: 1.5px solid var(--border);
@@ -711,18 +767,18 @@
         </div>
 
         <div id="payWebpay">
-          <div class="co-webpay-box">
-            <div class="co-webpay-head">
-              <div class="co-webpay-head-title">Pago seguro con WebPay Plus</div>
-              <div class="co-webpay-logo">WEBPAY</div>
+          <div class="co-mp-box">
+            <div class="co-mp-head">
+              <div class="co-mp-head-title">Pago seguro con MercadoPago</div>
+              <div class="co-mp-logo">MercadoPago</div>
             </div>
-            <div class="co-webpay-body">
-              <div class="co-webpay-cards">
-                <span class="co-webpay-card-badge">Visa</span>
-                <span class="co-webpay-card-badge">Mastercard</span>
-                <span class="co-webpay-card-badge">Redcompra</span>
-                <span class="co-webpay-card-badge">American Express</span>
-                <span class="co-webpay-card-badge">Cuotas sin interés</span>
+            <div class="co-mp-body">
+              <div class="co-mp-cards">
+                <span class="co-mp-card-badge">Visa</span>
+                <span class="co-mp-card-badge">Mastercard</span>
+                <span class="co-mp-card-badge">Redcompra</span>
+                <span class="co-mp-card-badge">American Express</span>
+                <span class="co-mp-card-badge">Débito</span>
               </div>
               <div class="co-field-row">
                 <div class="co-field">
@@ -745,6 +801,9 @@
                   <label>Nombre en la tarjeta</label>
                   <input type="text" placeholder="Como aparece en tu tarjeta">
                 </div>
+              </div>
+              <div class="co-mp-installments">
+                💳 Paga en hasta 12 cuotas sin interés con tarjetas seleccionadas
               </div>
             </div>
           </div>
@@ -783,6 +842,19 @@
           </div>
           <div id="discountMsg" style="font-size:0.78rem;display:none"></div>
         </div>
+      </div>
+
+      <!-- Order bump / upsell -->
+      <div class="co-upsell" id="upsellBox" onclick="toggleUpsell()">
+        <div class="co-upsell__img">
+          <img src="https://cdn.shopify.com/s/files/1/0935/9894/1459/files/foto_1.jpg?v=1764865052" alt="Peluche Térmico">
+        </div>
+        <div class="co-upsell__info">
+          <div class="co-upsell__tag">✦ Agregar a mi pedido</div>
+          <div class="co-upsell__name">AFP Pups Peluche Térmico Calmante</div>
+          <div class="co-upsell__price">Solo <strong>$12.990</strong> — lo ponemos directo en tu caja</div>
+        </div>
+        <div class="co-upsell__check" id="upsellCheck"></div>
       </div>
 
       <button class="co-cta" onclick="placeOrder()">
@@ -882,7 +954,7 @@
     function fmt(n) { return '$' + n.toLocaleString('es-CL'); }
 
     function recalcTotal() {
-      const total = SUBTOTAL + shipping - discount;
+      const total = SUBTOTAL + shipping - discount + (upsellAdded ? 12990 : 0);
       document.getElementById('grandTotal').textContent = fmt(total);
     }
 
@@ -929,8 +1001,37 @@
     function selectPayment(method) {
       document.querySelectorAll('.co-pay-tab').forEach(t => t.classList.remove('selected'));
       event.currentTarget.classList.add('selected');
-      document.getElementById('payWebpay').style.display  = method === 'webpay'   ? 'block' : 'none';
+      document.getElementById('payWebpay').style.display = method === 'webpay' ? 'block' : 'none';
       document.getElementById('payTransfer').classList.toggle('active', method === 'transfer');
+    }
+
+    let upsellAdded = false;
+    function toggleUpsell() {
+      const box   = document.getElementById('upsellBox');
+      const check = document.getElementById('upsellCheck');
+      upsellAdded = !upsellAdded;
+      box.classList.toggle('checked', upsellAdded);
+      check.textContent = upsellAdded ? '✓' : '';
+      const extra = upsellAdded ? 12990 : -12990;
+      shipping += 0;
+      document.getElementById('grandTotal').textContent =
+        fmt(SUBTOTAL + shipping - discount + (upsellAdded ? 12990 : 0));
+      if (upsellAdded) {
+        const rows = document.querySelector('.co-sum-rows');
+        const existing = document.getElementById('upsellSumRow');
+        if (!existing) {
+          const div = document.createElement('div');
+          div.id = 'upsellSumRow';
+          div.className = 'co-sum-row';
+          div.style.color = 'var(--sky-deep)';
+          div.innerHTML = '<span>✦ Peluche Térmico (upsell)</span><span>+$12.990</span>';
+          rows.insertBefore(div, rows.querySelector('.co-sum-row--total'));
+        }
+      } else {
+        const r = document.getElementById('upsellSumRow');
+        if (r) r.remove();
+      }
+      recalcTotal();
     }
 
     function applyDiscount() {
